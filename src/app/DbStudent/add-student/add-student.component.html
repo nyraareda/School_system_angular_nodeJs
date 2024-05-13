@@ -1,0 +1,9 @@
+<p>add-student works!</p>
+
+Id: <input type="text" [(ngModel)]="newstd._id"><br>
+Student Name: <input type="text" [(ngModel)]="newstd.name"><br>
+Department: <select [(ngModel)]="newstd.department">
+    <option *ngFor="let department of departments" [value]="department._id">{{ department.name }}</option>
+  </select><br>
+Student Image: <input type="file" (change)="onFileSelected($event)"><br>
+<button class="btn btn-primary" (click)="save()">Add new student</button>

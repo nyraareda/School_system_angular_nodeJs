@@ -1,0 +1,42 @@
+<h4>Show all students</h4>
+<a routerLink="/studentsdb/add">Add Student</a>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Department Name</th>
+      <th scope="col">Image</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (std of allstd; track $index) {
+      <tr>
+        <th scope="row">{{std._id}}</th>
+        <th scope="row">{{std.name}}</th>
+        <th scope="row">{{std.department}}</th>
+        <td>
+          <img *ngIf="std.image" [src]="getImageUrl(std.image)" alt="Student Image" width="100" height="100">
+        </td>
+        <td>
+          <a [routerLink]="['/studentsdb/details/',std._id]">Details</a>
+        </td>
+
+        <td>
+          <a [routerLink]="['/studentsdb/update/',std._id]">Update</a>
+        </td>
+        <td>
+          <a [routerLink]="['/studentsdb/delete/',std._id]">Delete</a>
+        </td>
+
+      </tr>
+    }@empty {
+        <tr>
+            <td>
+                No Departments found
+            </td>
+        </tr>
+    }
+  </tbody>
+</table>

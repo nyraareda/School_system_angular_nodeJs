@@ -1,0 +1,9 @@
+<p>add-department works!</p>
+Id<input type="text" [(ngModel)]="newdept._id">
+Department Name<input type="text" [(ngModel)]="newdept.name">
+Departments<select [(ngModel)]="newdept.location" >
+    <option>Alex</option>
+    <option>Cairo</option>
+    <option>Mansoura</option>
+</select>
+<button class="btn btn-primary" (click)="save()">Add new department</button>

@@ -1,0 +1,62 @@
+<div class="container">
+  <h1>Student List</h1>
+  <input type="text" [(ngModel)]="newstudent.Id">
+  <input type="text" [(ngModel)]="newstudent.Name">
+  <input type="text" [(ngModel)]="newstudent.Age">
+  <button (click)="save()" style="margin-top: 0.5rem;margin-bottom: 0.5rem;">Save</button>    
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (student of students; track student.Id) {
+        <tr>
+          <th scope="row">{{student.Id}}</th>
+          <td>{{student.Name}}</td>
+          <td>{{student.Age}}</td>
+          <td>
+            <button class="btn btn-primary" (click)="show(student)" style="margin-top: 0.5rem;margin-bottom: 0.5rem;">Show</button>
+            <button class="btn btn-danger" (click)="deleteById(student.Id)" style="margin-top: 0.5rem;margin-bottom: 0.5rem;">Delete</button>
+            <button class="btn btn-success" (click)="editStudent(student)">Edit</button>
+          </td>
+        </tr>
+        
+        
+        <tr *ngIf="editedStudent === student">
+          <td colspan="4">
+            <form (submit)="saveStudentChanges()">
+              <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" [ngModel]="editedStudent ? editedStudent.Name : ''" name="name" required (ngModelChange)="editedStudent ? editedStudent.Name = $event : null">
+              </div>
+              <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control" id="age" [ngModel]="editedStudent ? editedStudent.Age : ''" name="age" required (ngModelChange)="editedStudent ? editedStudent.Age = $event : null">
+              </div>
+              <button type="submit" class="btn btn-primary">Save</button>
+              <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+            </form>
+          </td>
+        </tr>
+      }
+      @empty {
+        <tr>
+          <td>No Student found</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <div *ngIf="selectedStudent">
+    <h3>Selected Student:</h3>
+    <p>ID: {{ selectedStudent.Id }}</p>
+    <p>Name: {{ selectedStudent.Name }}</p>
+    <p>Age: {{ selectedStudent.Age }}</p>
+  </div>
+</div>
