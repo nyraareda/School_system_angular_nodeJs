@@ -1,0 +1,67 @@
+<div class="container">
+<h5>Show All Students</h5>
+<button class="btn btn-primary" (click)="addNew()">Add Student</button>
+<!-- <button class="btn btn-primary" (click)="show()">Show All Students</button> -->
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (student of allStd; track student.Id) {
+      <tr>
+        <th scope="row">{{student.Id}}</th>
+        <td>{{student.Name}}</td>
+        <td>{{student.Age}}</td>
+
+              <td>
+                <a routerLink="/students/details/{{student.Id}}">details</a>
+              </td>
+              <td>
+                <app-get-one-student [selectedStudent]="student" (getClicked)="onGetOne($event)"></app-get-one-student>
+              </td>
+              <td>
+                <td>
+                    <app-delete-student [studentId]="student.Id" (deleteClicked)="onDeleteStudent($event)"></app-delete-student>
+                </td>
+                <td>
+                    <app-update-one-student [studentId]="student.Id" (updateClicked)="onUpdateStudent(student.Id)"></app-update-one-student>                </td>
+      </tr>
+      <tr *ngIf="editedStudent === student">
+        <td colspan="4">
+            <form (submit)="saveStudentChanges(student.Id)">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" id="name" [ngModel]="editedStudent ? editedStudent.Name : ''" name="name" required (ngModelChange)="editedStudent ? editedStudent.Name = $event : null">
+            </div>
+            <div class="form-group">
+              <label for="age">Age:</label>
+              <input type="number" class="form-control" id="age" [ngModel]="editedStudent ? editedStudent.Age : ''" name="age" required (ngModelChange)="editedStudent ? editedStudent.Age = $event : null">
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+          </form>
+        </td>
+      </tr>
+    }@empty {
+      <tr>
+        <td colspan="3">
+          No students found
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<div *ngIf="selectedStudent">
+    <h3>Selected Student:</h3>
+    <p>ID: {{ selectedStudent.Id }}</p>
+    <p>Name: {{ selectedStudent.Name }}</p>
+    <p>Age: {{ selectedStudent.Age }}</p>
+  </div>
+</div>
+<router-outlet></router-outlet>

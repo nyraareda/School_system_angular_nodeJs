@@ -1,0 +1,11 @@
+<p>update-student works!</p>
+Student Name: <input type="text" [(ngModel)]="updatestd.name"><br>
+Departments: 
+<select [(ngModel)]="updatestd.department">
+    <option value="1">Department 1</option>
+    <option value="2">Department 2</option>
+    <option value="3">Department 3</option>
+</select><br>
+<img *ngIf="!selectedFile && oldImageUrl" [src]="oldImageUrl" alt="Old Image"><br>
+Student Image: <input type="file" (change)="onFileSelected($event)"><br>
+<button class="btn btn-primary" (click)="save()">Update Student</button>
