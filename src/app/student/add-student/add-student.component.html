@@ -1,0 +1,9 @@
+<div class="container">
+<p>Add New Student</p>
+<label for="id">Id</label>
+<input id="id" type="text" [(ngModel)]="newstd.Id">
+Name<input type="text" [(ngModel)]="newstd.Name">
+Age<input type="text" [(ngModel)]="newstd.Age">
+<br>
+<button class="btn btn-primary" (click)="save()">Add new student</button>
+</div>

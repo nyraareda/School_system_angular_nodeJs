@@ -1,0 +1,80 @@
+
+<h4>Show all departments</h4>
+<!-- <button (click)="show()">Show All Departments</button> -->
+<!-- <button class="btn btn-primary" (click)="add()">Add department</button> -->
+<a routerLink="/departments/add">Add department</a>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <!-- <th scope="col">Age</th>-->
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (dept of allDept; track $index) {
+      <tr>
+        <th scope="row">{{dept._id}}</th>
+        <td>{{dept.name}}</td>
+        <td>{{dept.location}}</td>
+        <!-- <td>
+          <button class="btn btn-primary" (click)="getOneby(dept.Iddept)" style="margin-top: 0.5rem;margin-bottom: 0.5rem;">Show</button>
+        </td> -->
+        <td>
+          <a [routerLink]="['/departments/details/',dept._id]">Details</a>
+        </td>
+
+        <td>
+          <a [routerLink]="['/departments/update/',dept._id]">Update</a>
+        </td>
+        <td>
+          <a [routerLink]="['/departments/delete/',dept._id]">Delete</a>
+        </td>
+        <!-- <td>
+          <a [routerLink]="['/departments/delete/',dept._id]">Delete</a>
+        </td> -->
+        <!-- <td>
+          <app-get-one-department [selectedDepartment] ="dept" (getClicked)="onGetbyId($event)"></app-get-one-department>
+        </td>
+            
+                <td>
+                    <app-delete-department [deptId]="dept.Iddept" (deleteClicked)="onDeleteDept($event)"></app-delete-department>
+                </td>
+                <td>
+                    <app-update-department [deptId]="dept.Iddept" (updateclicked)="onUpdateDept(dept.Iddept)"></app-update-department>
+                </td> -->
+      </tr>
+      <!-- <tr *ngIf="editedDepartment === dept">
+        <td colspan="4">
+            <form (submit)="saveDeptChanges(dept.Iddept)">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" [ngModel]="editedDepartment ? editedDepartment.Namedept : ''" name="deptname" required (ngModelChange)="editedDepartment ? editedDepartment.Namedept = $event : null">
+                  </div>
+
+                  <button class="btn btn-primary" type="submit">Save</button>
+                  <button class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+            </form>
+
+        </td>
+    </tr> -->
+    }@empty {
+        <tr>
+            <td>
+                No Departments found
+            </td>
+        </tr>
+    }
+  </tbody>
+</table>
+
+<!-- <div *ngIf="selectedDepartment">
+    <h5>Selected Department:</h5>
+    <p>ID: {{ selectedDepartment.Iddept }}</p>
+    <p>Name: {{ selectedDepartment.Namedept }}</p>
+    <p>Age: {{ selectedStudent.Age }}</p> 
+  </div> -->
+
+  <br>
+  <hr>
