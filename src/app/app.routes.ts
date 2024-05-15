@@ -9,6 +9,7 @@ import { LoginComponent } from './account/login/login.component';
 import { AllStudentComponent } from './DbStudent/all-student/all-student.component';
 import { canLogin } from './guards/can-login.guard';
 import { AuthGuard } from './guards/auth.guard';
+
 // import { AllDepartmentComponent } from './department/all-department/all-department.component';
 // import { AddDepartmentComponent } from './department/add-department/add-department.component';
 // import { DepartmentDetailsComponent } from './department/department-details/department-details.component';
